@@ -30,8 +30,7 @@ this.shorn_scenario <- this.inherit("scripts/scenarios/world/starting_scenario",
 		return this.Const.DLC.Paladins;
 	}
 
-	function onSpawnAssets()
-	{
+	function onSpawnAssets() {
 		local roster = this.World.getPlayerRoster();
 		local names = [];
 
@@ -43,99 +42,225 @@ this.shorn_scenario <- this.inherit("scripts/scenarios/world/starting_scenario",
 		}
 
 		local bros = roster.getAll();
-		bros[0].setStartValuesEx([
-			"beast_hunter_background"
-		]);
-		bros[0].getBackground().m.RawDescription = "{You and %name% were the sole survivors of an ambush on your old company years ago, and if it wasn\'t for him, you would probably be dead too. They\'re one of the best fighters you\'ve ever seen, and are a prime candidate to become one of the first shorn.}";
-		bros[0].setPlaceInFormation(3);
-		bros[0].setVeteranPerks(2);
-		bros[0].getSkills().add(this.new("scripts/skills/traits/loyal_trait"));
-		bros[0].getSkills().add(this.new("scripts/skills/traits/hate_beasts_trait"));
-		bros[0].improveMood(2.5, "Is back in business");
-		bros[0].m.Talents = [];
-		local talents = bros[0].getTalents();
-		talents.resize(this.Const.Attributes.COUNT, 0);
-		talents[this.Const.Attributes.Hitpoints] = 2;
-		talents[this.Const.Attributes.MeleeSkill] = 3;
-		talents[this.Const.Attributes.MeleeDefense] = 3;
-		bros[0].getBackground().addPerk(this.Const.Perks.PerkDefs.HoldOut, 2, false);
-		bros[0].getSkills().add(this.new("scripts/skills/perks/perk_hold_out"));
-		local items = bros[0].getItems();
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Head));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Body));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Offhand));
-		local armor = this.new("scripts/items/legend_armor/cloth/wanderers_coat");
-		local legend_armor_upgrade = this.new("scripts/items/legend_armor/armor_upgrades/legend_direwolf_pelt_upgrade");
-		armor.setUpgrade(legend_armor_upgrade);
-		items.equip(armor);
-		items.equip(this.new("scripts/items/weapons/woodcutters_axe"));
-	
-		bros[1].setStartValuesEx([
-			"anatomist_background"
-		]);
-		bros[1].getBackground().m.RawDescription = "{%name% is a damned good anatomist, and a bit of an odd sort, you\'d have to be to go along with this plan. But their people are the only ones who knows how to extract the mutagens necessary to create a shorn, and for that sole reason, they are critical to your cause.}";
-		bros[1].setPlaceInFormation(4);
-		bros[1].setVeteranPerks(2);
-		bros[1].improveMood(1, "Eager to get started");
-		bros[1].m.Talents = [];
-		talents = bros[1].getTalents();
-		talents.resize(this.Const.Attributes.COUNT, 0);
-		talents[this.Const.Attributes.Fatigue] = 2;
-		talents[this.Const.Attributes.Bravery] = 2;
-		talents[this.Const.Attributes.Initiative] = 1;
-		talents[this.Const.Attributes.MeleeSkill] = 1;
-		bros[1].getBackground().addPerk(this.Const.Perks.PerkDefs.HoldOut, 2, false);
-		bros[1].getSkills().add(this.new("scripts/skills/perks/perk_hold_out"));
-		items = bros[1].getItems();
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Body));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Head));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Offhand));
-		
-		local armor = this.new("scripts/items/legend_armor/cloth/anatomist_robe");
-		local cloak = this.new("scripts/items/legend_armor/cloak/anatomist_hood");
-		armor.setUpgrade(cloak);
-		items.equip(armor);
-		
-		local hood = this.new("scripts/items/legend_helmets/hood/legend_helmet_beak_hood");
-		local top = this.new("scripts/items/legend_helmets/top/legend_helmet_mask_beak");
-		local vanity = this.new("scripts/items/legend_helmets/vanity/legend_helmet_physicians_hood");
-		hood.setUpgrade(top);
-		hood.setUpgrade(vanity);
-		items.equip(hood);
-		items.equip(this.new("scripts/items/weapons/shortsword"));
-		
-		bros[2].setStartValuesEx([
-			"legend_alchemist_background"
-		]);
-		bros[2].getBackground().m.RawDescription = "{An alchemist down on their luck, %name% joined you out of necessity, not desire. With no money and piling debt, %name% decided to put their skills as an alchemist to use and go along with your, as they say, \"frankly ridiculous\" plan.}";
-		bros[2].setPlaceInFormation(5);
-		bros[2].setVeteranPerks(2);
-		bros[2].worsenMood(1.5, "Thinks this plan is ridiculous");
-		bros[2].getSkills().add(this.new("scripts/skills/traits/legend_slack_trait"));
-		bros[2].m.Talents = [];
-		talents = bros[2].getTalents();
-		talents.resize(this.Const.Attributes.COUNT, 0);
-		talents[this.Const.Attributes.Fatigue] = 1;
-		talents[this.Const.Attributes.RangedSkill] = 3;
-		talents[this.Const.Attributes.RangedDefense] = 3;
-		talents[this.Const.Attributes.Hitpoints] = 1
-		bros[2].getBackground().addPerk(this.Const.Perks.PerkDefs.HoldOut, 2, false);
-		bros[2].getSkills().add(this.new("scripts/skills/perks/perk_hold_out"));
-		items = bros[2].getItems();
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Head));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Body));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Offhand));
-		items.unequip(items.getItemAtSlot(this.Const.ItemSlot.Ammo));
-		local armor = this.new("scripts/items/legend_armor/cloth/legend_tunic");
-		local plate = this.new("scripts/items/legend_armor/plate/undertakers_apron");
-		armor.setUpgrade(plate);
-		items.equip(armor);
-		items.equip(this.new("scripts/items/weapons/crossbow"));
-		items.equip(this.new("scripts/items/ammo/quiver_of_bolts"));
-		
+
+		// Assign names to the characters (in order)
+		local keys = ["beast", "anatomist", "alchemist"];
+
+		// Define the talents for each character
+		local bro_talents = {
+				beast = {
+					Count = 0,
+					Hitpoints = 2,
+					MeleeSkill = 3,
+					MeleeDefense = 3,
+					Fatigue = 0,
+					Bravery = 0,
+					Initiative = 0,
+					RangedSkill = 0,
+					RangedDefense = 0
+				},
+				anatomist = {
+					Count = 0,
+					Hitpoints = 2,
+					MeleeSkill = 1,
+					MeleeDefense = 3,
+					Fatigue = 2,
+					Bravery = 2,
+					Initiative = 1,
+					RangedSkill = 0,
+					RangedDefense = 0
+				},
+				alchemist = {
+					Count = 0,
+					Hitpoints = 2,
+					MeleeSkill = 3,
+					MeleeDefense = 3,
+					Fatigue = 0,
+					Bravery = 0,
+					Initiative = 0,
+					RangedSkill = 0,
+					RangedDefense = 0
+				}
+		};
+
+		// Define an associative array to hold the attributes for each character
+		local bro_attributes = {
+			beast = {
+				background = "beast_hunter_background",
+				description = "Example desc 1",
+				formation = 4,
+				veteranPerks = 2,
+				improveMood = [2.5, "Is back in business"],
+				worsenMood = [0, "Is back in business"],
+				skills = [
+					"scripts/skills/perks/perk_hold_out",
+					"scripts/skills/traits/loyal_trait",
+					"scripts/skills/traits/hate_beasts_trait"
+				],
+				unequip = [
+					this.Const.ItemSlot.Head,
+					this.Const.ItemSlot.Body,
+					this.Const.ItemSlot.Mainhand,
+					this.Const.ItemSlot.Offhand
+				],
+				items = [
+					["scripts/items/weapons/woodcutters_axe",""],
+					["scripts/items/legend_armor/cloth/wanderers_coat",
+						[
+							"scripts/items/legend_armor/armor_upgrades/legend_direwolf_pelt_upgrade"
+						],
+					],
+				]
+			},
+			anatomist = {
+				background = "anatomist",
+				description = "Example desc 2",
+				formation = 5,
+				veteranPerks = 2,
+				improveMood = [1, "Eager to get started"],
+				worsenMood = [0, ""],
+				skills = [
+					"scripts/skills/perks/perk_hold_out",
+				],
+				unequip = [
+					this.Const.ItemSlot.Head,
+					this.Const.ItemSlot.Body,
+					this.Const.ItemSlot.Mainhand,
+					this.Const.ItemSlot.Offhand
+				],
+				items = [
+					// Some items have upgrades, which are defined in the second array
+					["scripts/items/weapons/shortsword",""],
+					["scripts/items/legend_armor/cloth/anatomist_robe",
+						[
+							"scripts/items/legend_armor/cloak/anatomist_hood"
+						],
+					],
+					["scripts/items/legend_helmets/hood/legend_helmet_beak_hood",
+							[
+								"scripts/items/legend_helmets/top/legend_helmet_mask_beak",
+								"scripts/items/legend_helmets/vanity/legend_helmet_physicians_hood"
+							]
+					],
+				]
+			},
+			alchemist = {
+				background = "alchemist",
+				description = "Example desc 2",
+				formation = 3,
+				veteranPerks = 2,
+				improveMood = [0, ""],
+				worsenMood = [1.5, "Thinks this plan is ridiculous"],
+				skills = [
+					"scripts/skills/traits/legend_slack_trait",
+					"scripts/skills/perks/perk_hold_out"
+				],
+				unequip = [
+					this.Const.ItemSlot.Head,
+					this.Const.ItemSlot.Body,
+					this.Const.ItemSlot.Mainhand,
+					this.Const.ItemSlot.Offhand
+				],
+				items = [
+					["scripts/items/weapons/crossbow",""],
+					["scripts/items/ammo/quiver_of_bolts",""],
+					["scripts/items/legend_armor/cloth/legend_tunic",
+						[
+							"scripts/items/legend_armor/plate/undertakers_apron"
+						],
+					],
+				],
+			}
+		};
+
+		// Loop through each bros and set talents
+		for (local i = 0; i < bros.len(); i++) {
+			local talents = bros[i].getTalents();
+			local attrs = bro_talents[keys[i]];
+			foreach (attr, value in attrs) {
+				if (attr == "Count") {
+					talents.resize(this.Const.Attributes.COUNT, [value]);
+				}
+				else if (attr == "Hitpoints") {
+					talents[this.Const.Attributes.Hitpoints] = [value];
+				}
+				else if (attr == "MeleeSkill") {
+					talents[this.Const.Attributes.MeleeSkill] = [value];
+				}
+				else if (attr == "MeleeDefense") {
+					talents[this.Const.Attributes.MeleeDefense] = [value];
+				}
+				else if (attr == "Fatigue") {
+					talents[this.Const.Attributes.Fatigue] = [value];
+				}
+				else if (attr == "Bravery") {
+					talents[this.Const.Attributes.Bravery] = [value];
+				}
+				else if (attr == "Initiative") {
+					talents[this.Const.Attributes.Initiative] = [value];
+				}
+				else if (attr == "RangedSkill") {
+					talents[this.Const.Attributes.RangedSkill] = [value];
+				}
+				else if (attr == "RangedDefense") {
+					talents[this.Const.Attributes.RangedDefense] = [value];
+				}
+			}
+		}
+
+		// Loop through bros and set attributes
+		for (local i = 0; i < bros.len(); i++) {
+			local attrs = bro_attributes[keys[i]];
+			foreach (attr, value in attrs) {
+				if (attr == "background") {
+					bros[i].setStartValuesEx([value]);
+				}
+				else if (attr == "description") {
+					bros[i].getBackground().m.RawDescription([value]);
+				}
+				else if (attr == "formation") {
+					bros[i].setPlaceInFormation([value]);
+				}
+				else if (attr == "veteranPerks") {
+						bros[i].setVeteranPerks([value]);
+				}
+				else if (attr == "improveMood") {
+						bros[i].improveMood([value][0], [value][1]);
+				}
+				else if (attr == "worsenMood") {
+						bros[i].worsenMood([value][0], [value][1]);
+				}
+				else if (attr == "skills") {
+					foreach (skill in [value]) {
+						bros[i].getSkills().add(this.new(skill));
+					}
+				}
+				else if (attr == "unequip") {
+					foreach (slot in [value]) {
+						local items = bros[i].getItems();
+						items.unequip(items.getItemAtSlot(slot));
+					}
+				}
+				else if (attr == "items") {
+					local items = bros[i].getItems();
+					foreach (item in [value]) {
+						local item_to_equip = this.new(item[0]);
+						items.equip(item_to_equip);
+						// If there are upgrades, apply them
+						if (typeof item[1] == "array") { //If second element is non-blank
+							// Loop through each upgrade and apply it
+							foreach (upgrade in item[1]) {
+								local item_upgrade = this.new(upgrade);
+								item_to_equip.setUpgrade(item_upgrade);
+							}
+						}
+					}
+				}
+			}
+			bros[i].m.Talents = [];
+			bros[i].getBackground().addPerk(this.Const.Perks.PerkDefs.HoldOut, 2, false);
+		}
+
 		this.World.Assets.getStash().add(this.new("scripts/items/supplies/legend_wolf_meat_item"));
 		this.World.Assets.getStash().add(this.new("scripts/items/supplies/legend_liquor_item"));
 		this.World.Assets.getStash().add(this.new("scripts/items/misc/anatomist/research_notes_beasts_item"));
@@ -621,7 +746,7 @@ this.shorn_scenario <- this.inherit("scripts/scenarios/world/starting_scenario",
 		this.World.Assets.m.ExtraLootChance = 25;
 		this.World.Assets.m.FootprintVision = 1.25;
 	}
-	
+
 	function onBuildPerkTree( _background )
 	{
 		local perk = ::MSU.Array.rand(this.m.FavouredEnemyPerks);

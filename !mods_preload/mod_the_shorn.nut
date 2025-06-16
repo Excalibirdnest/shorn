@@ -1,5 +1,5 @@
 ::ModTheShorn <- {
 	ID = "mod_the_shorn",
 	Name = "ModTheShorn",
-	Version = "1.0.0"
+	Version = "1.0.1"
 };
